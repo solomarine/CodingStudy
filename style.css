@@ -1,8 +1,8 @@
 :root {
-    --background-color-light: #ffffff;
+    --background-color-light: #fcfcfc;
     --text-color-light: #333;
-    --container-bg-light: #ffffff;
-    --button-bg-light: #008cff;
+    --container-bg-light: #fcfcfc;
+    --button-bg-light: #6c757d;
     --button-text-light: #ffffff;
     --lotto-number-bg-light: #e9ecef;
 
@@ -15,7 +15,7 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
     background-color: var(--background-color-light);
@@ -34,7 +34,7 @@ body.dark-mode {
     background-color: var(--container-bg-light);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
     transition: background-color 0.3s;
 }
 
