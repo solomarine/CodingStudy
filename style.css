@@ -1,26 +1,44 @@
 :root {
-    --background-color-light: #f8f8f8;
-    --text-color-light: #333;
+    /* Light Mode Colors */
+    --background-color-light: #f4f7f6; /* Soft light background */
+    --text-color-light: #333333;
     --container-bg-light: #ffffff;
-    --button-bg-light: #0056b3;
+    --button-bg-light: #4a90e2; /* Blue */
     --button-text-light: #ffffff;
     --lotto-number-bg-light: #e0e0e0;
+    --header-bg-light: #ffffff;
+    --footer-bg-light: #f0f0f0;
+    --sidebar-bg-light: #e6f0fa; /* Light blue for sidebar */
+    --link-color-light: #4a90e2;
+    --link-hover-light: #2d6dc0;
+    --lotto-box-border-light: #dcdcdc;
+    --lotto-box-shadow-light: rgba(0, 0, 0, 0.1);
 
-    --background-color-dark: #1a1a1a;
-    --text-color-dark: #f0f2f5;
-    --container-bg-dark: #2c2c2c;
-    --button-bg-dark: #0056b3;
+    /* Dark Mode Colors */
+    --background-color-dark: #2c3e50; /* Dark blue-grey */
+    --text-color-dark: #ecf0f1;
+    --container-bg-dark: #34495e;
+    --button-bg-dark: #5dade2; /* Lighter blue */
     --button-text-dark: #ffffff;
-    --lotto-number-bg-dark: #3a3a3a;
+    --lotto-number-bg-dark: #4a6572;
+    --header-bg-dark: #34495e;
+    --footer-bg-dark: #2c3e50;
+    --sidebar-bg-dark: #263849; /* Darker blue-grey for sidebar */
+    --link-color-dark: #5dade2;
+    --link-hover-dark: #85c1e9;
+    --lotto-box-border-dark: #4a6572;
+    --lotto-box-shadow-dark: rgba(0, 0, 0, 0.3);
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 20px;
+    /* Remove padding from body as main-layout-wrapper will handle layout */
     background-color: var(--background-color-light);
     color: var(--text-color-light);
     transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    display: flex; /* Use flexbox to make main-layout-wrapper fill body */
 }
 
 body.dark-mode {
@@ -28,27 +46,129 @@ body.dark-mode {
     color: var(--text-color-dark);
 }
 
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: var(--container-bg-light);
-    padding: 20px;
+.main-layout-wrapper {
+    display: grid;
+    grid-template-columns: 200px 1fr; /* Sidebar fixed width, content flexible */
+    grid-template-rows: 1fr auto; /* Content area takes most space, footer at bottom */
+    width: 100%;
+    max-width: 1200px; /* Max width for the whole application */
+    margin: 0 auto; /* Center the layout */
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    overflow: hidden; /* To contain rounded corners and shadows */
+}
+
+/* For small screens, sidebar will collapse */
+@media (max-width: 768px) {
+    .main-layout-wrapper {
+        grid-template-columns: 1fr; /* Single column layout */
+        grid-template-rows: auto 1fr auto; /* Header, content, footer */
+    }
+    .left-sidebar {
+        /* On small screens, the sidebar could become a top menu or hidden behind a toggle */
+        display: none; /* Hide by default, can be toggled with JS */
+    }
+    .main-content-wrapper {
+        margin-left: 0 !important; /* Remove sidebar margin */
+    }
+}
+
+.left-sidebar {
+    grid-column: 1 / 2; /* Occupy the first column */
+    grid-row: 1 / -1; /* Span all rows */
+    background-color: var(--sidebar-bg-light);
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid var(--lotto-box-border-light);
+}
+
+body.dark-mode .left-sidebar {
+    background-color: var(--sidebar-bg-dark);
+    border-right: 1px solid var(--lotto-box-border-dark);
+}
+
+.left-sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.left-sidebar nav ul li {
+    width: 100%;
+}
+
+.left-sidebar nav ul li a {
+    display: block;
+    padding: 15px 20px;
+    color: var(--text-color-light);
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+    border-left: 5px solid transparent; /* For active indicator */
+}
+
+body.dark-mode .left-sidebar nav ul li a {
+    color: var(--text-color-dark);
+}
+
+.left-sidebar nav ul li a:hover {
+    background-color: var(--link-hover-light);
+    color: var(--button-text-light); /* White text on hover for contrast */
+    border-left-color: var(--button-bg-light);
+}
+
+body.dark-mode .left-sidebar nav ul li a:hover {
+    background-color: var(--link-hover-dark);
+    color: var(--button-text-dark);
+    border-left-color: var(--button-bg-dark);
+}
+
+.main-content-wrapper {
+    grid-column: 2 / 3; /* Occupy the second column */
+    grid-row: 1 / -1; /* Span all rows */
+    display: flex;
+    flex-direction: column;
+    /* The container inside main-content-wrapper will manage its own max-width and margin */
+}
+
+.container {
+    max-width: 900px; /* Adjusted max-width for content area */
+    width: 100%;
+    margin: 20px auto; /* Centered with some vertical margin */
+    background-color: var(--container-bg-light);
+    padding: 30px; /* Increased padding */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--lotto-box-shadow-light); /* More pronounced shadow */
     transition: background-color 0.3s;
 }
 
 body.dark-mode .container {
     background-color: var(--container-bg-dark);
+    box-shadow: 0 4px 15px var(--lotto-box-shadow-dark);
 }
 
 header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px; /* Increased margin */
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--lotto-box-border-light);
+    position: relative; /* For theme toggle positioning */
+}
+
+body.dark-mode header {
+    border-bottom: 1px solid var(--lotto-box-border-dark);
 }
 
 header h1 {
     margin: 0 0 10px 0;
+    color: var(--text-color-light);
+}
+
+body.dark-mode header h1 {
+    color: var(--text-color-dark);
 }
 
 header p {
@@ -68,13 +188,63 @@ body.dark-mode header p {
     border: none;
     cursor: pointer;
     font-size: 24px;
+    color: var(--text-color-light); /* Make theme toggle color adaptive */
+}
+
+body.dark-mode #theme-toggle {
+    color: var(--text-color-dark);
 }
 
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px; /* Space between main sections */
 }
+
+.lotto-generator-sections {
+    display: flex;
+    gap: 30px; /* Increased gap */
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 30px; /* Increased margin */
+}
+
+.lotto-feature-box {
+    flex: 1;
+    min-width: 300px;
+    border: 1px solid var(--lotto-box-border-light);
+    border-radius: 12px; /* Slightly more rounded corners */
+    padding: 25px; /* Increased padding */
+    background-color: var(--container-bg-light);
+    box-shadow: 0 2px 10px var(--lotto-box-shadow-light); /* More pronounced shadow */
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .lotto-feature-box {
+    border: 1px solid var(--lotto-box-border-dark);
+    background-color: var(--container-bg-dark);
+    box-shadow: 0 2px 10px var(--lotto-box-shadow-dark);
+}
+
+.lotto-feature-box:hover {
+    transform: translateY(-5px); /* Subtle lift effect on hover */
+    box-shadow: 0 6px 20px var(--lotto-box-shadow-light);
+}
+
+body.dark-mode .lotto-feature-box:hover {
+    box-shadow: 0 6px 20px var(--lotto-box-shadow-dark);
+}
+
+h3 {
+    color: var(--link-color-light); /* Use a vibrant color for subheadings */
+    margin-top: 0;
+}
+
+body.dark-mode h3 {
+    color: var(--link-color-dark);
+}
+
 
 #lotto-sets-container {
     width: 100%;
@@ -86,10 +256,11 @@ main {
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
-    padding: 10px;
+    padding: 12px; /* Increased padding */
     background-color: var(--lotto-number-bg-light);
-    border-radius: 8px;
+    border-radius: 10px; /* Slightly more rounded corners */
     transition: background-color 0.3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 body.dark-mode .lotto-set {
@@ -98,55 +269,222 @@ body.dark-mode .lotto-set {
 
 .lotto-numbers {
     display: flex;
-    gap: 10px;
+    gap: 12px; /* Increased gap */
 }
 
 .lotto-number {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
+    width: 45px; /* Slightly larger */
+    height: 45px; /* Slightly larger */
     border-radius: 50%;
-    background-color: #ffffff;
-    color: #333;
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); /* Colorful gradient */
+    color: #ffffff;
     font-weight: bold;
-    font-size: 18px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 19px; /* Slightly larger font */
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2); /* More pronounced shadow */
+    transition: transform 0.2s ease-in-out;
 }
 
 body.dark-mode .lotto-number {
-    background-color: #4a4a4a;
-    color: #f0f2f5;
+    background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); /* Different gradient for dark mode */
+    color: #333;
 }
 
-#generate-btn {
-    padding: 12px 24px;
+.lotto-number:hover {
+    transform: scale(1.1); /* Pop effect on hover */
+}
+
+.generate-btn { /* Changed from #generate-btn to .generate-btn for reusability */
+    padding: 14px 28px; /* Increased padding */
     border: none;
-    border-radius: 8px;
+    border-radius: 30px; /* Pill-shaped button */
     background-color: var(--button-bg-light);
     color: var(--button-text-light);
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-body.dark-mode #generate-btn {
+body.dark-mode .generate-btn {
     background-color: var(--button-bg-dark);
 }
 
-#generate-btn:hover {
-    opacity: 0.9;
+.generate-btn:hover {
+    transform: translateY(-2px); /* Subtle lift */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    background-color: var(--link-hover-light); /* Darker on hover */
 }
 
-footer {
+body.dark-mode .generate-btn:hover {
+    background-color: var(--link-hover-dark);
+}
+
+/* Blog Post Card Styling */
+#blog-posts {
+    margin-top: 40px;
+    width: 100%;
+    padding: 20px;
+    background-color: var(--container-bg-light);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px var(--lotto-box-shadow-light);
+}
+
+body.dark-mode #blog-posts {
+    background-color: var(--container-bg-dark);
+    box-shadow: 0 2px 10px var(--lotto-box-shadow-dark);
+}
+
+#blog-posts h2 {
     text-align: center;
-    margin-top: 20px;
+    margin-bottom: 30px;
+    color: var(--link-color-light);
+}
+
+body.dark-mode #blog-posts h2 {
+    color: var(--link-color-dark);
+}
+
+.blog-post-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 25px;
+}
+
+.blog-post-card {
+    border: 1px solid var(--lotto-box-border-light);
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--background-color-light);
+    box-shadow: 0 2px 8px var(--lotto-box-shadow-light);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.dark-mode .blog-post-card {
+    border: 1px solid var(--lotto-box-border-dark);
+    background-color: var(--background-color-dark);
+    box-shadow: 0 2px 8px var(--lotto-box-shadow-dark);
+}
+
+.blog-post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--lotto-box-shadow-light);
+}
+
+body.dark-mode .blog-post-card:hover {
+    box-shadow: 0 5px 15px var(--lotto-box-shadow-dark);
+}
+
+.blog-post-card h3 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: var(--text-color-light);
+}
+
+body.dark-mode .blog-post-card h3 {
+    color: var(--text-color-dark);
+}
+
+.blog-post-card p {
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: var(--text-color-light);
+}
+
+body.dark-mode .blog-post-card p {
+    color: var(--text-color-dark);
+}
+
+.blog-post-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.blog-post-card a {
+    color: var(--button-bg-light);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+body.dark-mode .blog-post-card a {
+    color: var(--button-bg-dark);
+}
+
+.blog-post-card a:hover {
+    text-decoration: underline;
+}
+
+/* About Us and Contact Section Styling */
+#about-us, #contact {
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+    background-color: var(--container-bg-light);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px var(--lotto-box-shadow-light);
+}
+
+body.dark-mode #about-us, body.dark-mode #contact {
+    background-color: var(--container-bg-dark);
+    box-shadow: 0 2px 10px var(--lotto-box-shadow-dark);
+}
+
+#about-us h2, #contact h2 {
+    color: var(--link-color-light);
+    margin-bottom: 20px;
+}
+
+body.dark-mode #about-us h2, body.dark-mode #contact h2 {
+    color: var(--link-color-dark);
+}
+
+#about-us p, #contact p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+#contact a {
+    color: var(--button-bg-light);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+body.dark-mode #contact a {
+    color: var(--button-bg-dark);
+}
+
+#contact a:hover {
+    text-decoration: underline;
+}
+
+
+footer {
+    grid-column: 1 / -1; /* Span across all columns */
+    background-color: var(--footer-bg-light);
+    color: var(--text-color-light);
+    text-align: center;
+    padding: 20px;
     font-size: 14px;
-    color: #6c757d;
+    border-top: 1px solid var(--lotto-box-border-light);
+    margin-top: 20px; /* Add some space above the footer */
 }
 
 body.dark-mode footer {
-    color: #a0a0a0;
+    background-color: var(--footer-bg-dark);
+    color: var(--text-color-dark);
+    border-top: 1px solid var(--lotto-box-border-dark);
+}
+
+footer p {
+    margin: 0;
 }

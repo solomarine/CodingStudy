@@ -1,6 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-    const generateBtn = document.getElementById('generate-btn');
+    const generateBtnRegular = document.getElementById('generate-btn-regular');
+    const generateBtnPension = document.getElementById('generate-btn-pension');
     const themeToggle = document.getElementById('theme-toggle');
     const lottoSetsContainer = document.getElementById('lotto-sets-container');
 
@@ -79,13 +80,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Event listener for generate button
-    generateBtn.addEventListener('click', () => {
-        if (regularLottoRadio.checked) {
-            displayLottoSets();
-        } else if (pensionLottoRadio.checked) {
-            generatePensionLottoNumbers();
-        }
+    // Event listener for regular lotto generate button
+    generateBtnRegular.addEventListener('click', () => {
+        displayLottoSets();
+    });
+
+    // Event listener for pension lotto generate button
+    generateBtnPension.addEventListener('click', () => {
+        generatePensionLottoNumbers();
     });
 
     // Event listeners for lotto type selection
