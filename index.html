@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,19 +10,18 @@
     <div class="container">
         <header>
             <h1>로또 번호 추천기</h1>
+            <p>한 번에 5개의 번호 조합을 확인하세요!</p>
             <button id="theme-toggle">테마 변경</button>
         </header>
         <main>
-            <div class="lotto-display">
-                <span class="lotto-number"></span>
-                <span class="lotto-number"></span>
-                <span class="lotto-number"></span>
-                <span class="lotto-number"></span>
-                <span class="lotto-number"></span>
-                <span class="lotto-number"></span>
+            <div id="lotto-sets-container">
+                <!-- 로또 번호 세트가 여기에 표시됩니다. -->
             </div>
-            <button id="generate-btn">번호 생성</button>
+            <button id="generate-btn">새 번호 생성</button>
         </main>
+        <footer>
+            <p>Made with ❤️ by Gemini</p>
+        </footer>
     </div>
     <script src="main.js"></script>
 </body>
