@@ -11,11 +11,33 @@
         <header>
             <h1>로또 번호 추천기</h1>
             <p>한 번에 5개의 번호 조합을 확인하세요!</p>
+            <div class="lotto-type-selection" style="margin-bottom: 20px;">
+                <input type="radio" id="regular-lotto" name="lotto-type" value="regular" checked>
+                <label for="regular-lotto">일반 로또</label>
+                <input type="radio" id="pension-lotto" name="lotto-type" value="pension">
+                <label for="pension-lotto">연금복권 720+</label>
+            </div>
             <button id="theme-toggle">테마 변경</button>
         </header>
         <main>
-            <div id="lotto-sets-container">
-                <!-- 로또 번호 세트가 여기에 표시됩니다. -->
+            <div id="regular-lotto-display">
+                <div id="lotto-sets-container">
+                    <!-- 로또 번호 세트가 여기에 표시됩니다. -->
+                </div>
+            </div>
+            <div id="pension-lotto-display" style="display: none;">
+                <h2>연금복권 번호</h2>
+                <div class="pension-lotto-set" style="display: flex; justify-content: center; align-items: center; margin-bottom: 15px; padding: 10px; background-color: var(--lotto-number-bg-light); border-radius: 8px;">
+                    <span id="pension-group" style="font-size: 1.2em; font-weight: bold; margin-right: 10px;"></span>
+                    <div class="pension-numbers" style="display: flex; gap: 5px;">
+                        <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
+                        <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
+                        <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
+                        <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
+                        <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
+                        <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
+                    </div>
+                </div>
             </div>
             <button id="generate-btn">새 번호 생성</button>
         </main>
