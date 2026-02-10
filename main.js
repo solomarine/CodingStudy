@@ -14,6 +14,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const pensionGroupSpan = document.getElementById('pension-group');
     const pensionNumberDigits = document.querySelectorAll('.pension-number-digit');
 
+    // New elements for draw dates
+    const regularLottoDrawDate = document.getElementById('regular-lotto-draw-date');
+    const pensionLottoDrawDate = document.getElementById('pension-lotto-draw-date');
+
+    // Helper function to get the next specific day of the week
+    const getNextDrawDate = (dayOfWeek) => { // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+        const today = new Date();
+        const currentDay = today.getDay();
+        let daysUntilNextDraw = dayOfWeek - currentDay;
+        if (daysUntilNextDraw <= 0) {
+            daysUntilNextDraw += 7; // If it's today or past, get next week's day
+        }
+        const nextDrawDate = new Date(today);
+        nextDrawDate.setDate(today.getDate() + daysUntilNextDraw);
+
+        const year = nextDrawDate.getFullYear();
+        const month = String(nextDrawDate.getMonth() + 1).padStart(2, '0');
+        const day = String(nextDrawDate.getDate()).padStart(2, '0');
+
+        return `${year}-${month}-${day}`;
+    };
+
     // Function to generate regular lotto numbers
     const generateLottoSet = () => {
         const numbers = new Set();
@@ -76,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     pensionLottoRadio.addEventListener('change', () => {
-        if (pensionLottoRadio.checked) { // Corrected variable name from pottoLottoRadio to pensionLottoRadio
+        if (pensionLottoRadio.checked) {
             regularLottoDisplay.style.display = 'none';
             pensionLottoDisplay.style.display = 'block';
             generatePensionLottoNumbers(); // Generate numbers for pension lotto when selected
@@ -97,4 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
         generatePensionLottoNumbers();
         regularLottoDisplay.style.display = 'none';
     }
+
+    // Display draw dates on initial load
+    regularLottoDrawDate.textContent = `다음 추첨일: ${getNextDrawDate(6)} (토요일)`; // 6 for Saturday
+    pensionLottoDrawDate.textContent = `다음 추첨일: ${getNextDrawDate(4)} (목요일)`; // 4 for Thursday
 });
