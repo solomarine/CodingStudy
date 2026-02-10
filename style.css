@@ -1,10 +1,10 @@
 :root {
-    --background-color-light: #fcfcfc;
+    --background-color-light: #f8f8f8;
     --text-color-light: #333;
-    --container-bg-light: #fcfcfc;
-    --button-bg-light: #6c757d;
+    --container-bg-light: #ffffff;
+    --button-bg-light: #0056b3;
     --button-text-light: #ffffff;
-    --lotto-number-bg-light: #e9ecef;
+    --lotto-number-bg-light: #e0e0e0;
 
     --background-color-dark: #1a1a1a;
     --text-color-dark: #f0f2f5;

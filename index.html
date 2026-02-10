@@ -22,26 +22,35 @@
             <button id="theme-toggle">테마 변경</button>
         </header>
         <main>
-            <div id="regular-lotto-display">
-                <div id="lotto-sets-container">
-                    <!-- 로또 번호 세트가 여기에 표시됩니다. -->
-                </div>
-            </div>
-            <div id="pension-lotto-display" style="display: none;">
-                <h2>연금복권 번호</h2>
-                <div class="pension-lotto-set" style="display: flex; justify-content: center; align-items: center; margin-bottom: 15px; padding: 10px; background-color: var(--lotto-number-bg-light); border-radius: 8px;">
-                    <span id="pension-group" style="font-size: 1.2em; font-weight: bold; margin-right: 10px;"></span>
-                    <div class="pension-numbers" style="display: flex; gap: 5px;">
-                        <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
-                        <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
-                        <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
-                        <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
-                        <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
-                        <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
+            <div class="lotto-generator-sections" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px;">
+                <section class="lotto-feature-box" id="regular-lotto-section" style="flex: 1; min-width: 300px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; background-color: var(--container-bg-light); box-shadow: 0 2px 5px rgba(0,0,0,0.08);">
+                    <h3>일반 로또 (로또 6/45)</h3>
+                    <div id="regular-lotto-display">
+                        <div id="lotto-sets-container">
+                            <!-- 로또 번호 세트가 여기에 표시됩니다. -->
+                        </div>
                     </div>
-                </div>
+                    <button id="generate-btn-regular" class="generate-btn">새 번호 생성</button>
+                </section>
+
+                <section class="lotto-feature-box" id="pension-lotto-section" style="flex: 1; min-width: 300px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; background-color: var(--container-bg-light); box-shadow: 0 2px 5px rgba(0,0,0,0.08);">
+                    <h3>연금복권 720+</h3>
+                    <div id="pension-lotto-display">
+                        <div class="pension-lotto-set" style="display: flex; justify-content: center; align-items: center; margin-bottom: 15px; padding: 10px; background-color: var(--lotto-number-bg-light); border-radius: 8px;">
+                            <span id="pension-group" style="font-size: 1.2em; font-weight: bold; margin-right: 10px;"></span>
+                            <div class="pension-numbers" style="display: flex; gap: 5px;">
+                                <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
+                                <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
+                                <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
+                                <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
+                                <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
+                                <span class="pension-number-digit" style="font-size: 1.2em; font-weight: bold;"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="generate-btn-pension" class="generate-btn">새 번호 생성</button>
+                </section>
             </div>
-            <button id="generate-btn">새 번호 생성</button>
         </main>
         <!-- New sections for blog-like content -->
         <section id="blog-posts" style="margin-top: 40px; width: 100%;">
